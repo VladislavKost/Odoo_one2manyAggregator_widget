@@ -7,9 +7,14 @@ const formatters = registry.category("formatters");
 
 export class ListRenderO2ManyAggregator extends ListRenderer {
   get aggregates() {
-    debugger;
+    /**
+     * Агрегируются значения при условии указания значения в group_option
+     *
+     * @override
+     */
     // в values передаем записи в форме
     const values = this.props.list.records.map((r) => r.data);
+    //
     const aggregates = {};
     for (const fieldName in this.props.list.activeFields) {
       const field = this.fields[fieldName];
@@ -49,6 +54,7 @@ export class ListRenderO2ManyAggregator extends ListRenderer {
       }
       // в func передаем значение, записанное в group_operator в каждом столбце
       const func = field.group_operator;
+      //
       if (func) {
         let aggregateValue = 0;
         if (func === "max") {
@@ -83,4 +89,4 @@ export class ListRenderO2ManyAggregator extends ListRenderer {
   }
 }
 
-ListRenderO2ManyAggregator.template = "owl.ListRenderO2ManyAggregator";
+ListRenderO2ManyAggregator.template = "web.ListRenderer";
